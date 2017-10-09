@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import {Hero} from './hero';
 import { HeroService } from './hero.service';
 import { OnInit } from '@angular/core';
@@ -10,13 +11,16 @@ import { OnInit } from '@angular/core';
 })
 
 export class HeroesComponent implements OnInit{
-    constructor(private heroService: HeroService) { }
+    constructor(
+                    private router: Router,
+                    private heroService: HeroService
+                ) { }
 
     ngOnInit(): void {
         this.getHeroes();
     }
 
-    title = 'Angular app >>>';
+    title = 'My Heroes';
     hero: Hero = {
       id: 1,
       name: 'Windstorm'
@@ -32,6 +36,10 @@ export class HeroesComponent implements OnInit{
         // this.heroes = this.heroService.getHeroes();
         //this.heroService.getHeroesPromise().then(heroes => this.heroes = heroes);        //-----get data from mock immidiately
         this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);    //-----server latency simulation
+    }
+
+    gotoDetail(): void {
+        this.router.navigate(['/detail', this.selectedHero.id]);
     }
 }
 
