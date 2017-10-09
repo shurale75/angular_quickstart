@@ -16,10 +16,12 @@ export class HeroService {
 
     //------------------SERVER SIMULATION--------------------------------------------
     getHeroesSlowly(): Promise<Hero[]> {
-        return new Promise(resolve => {
-            // Simulate server latency with 2 second delay
-            setTimeout(() => resolve(this.getHeroes()), 2000);
-        });
+        /*return this.http.get(this.heroesUrl)
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);*/
+
+        return new Promise(resolve => { setTimeout(() => resolve(this.getHeroes()), 2000); });
     }
 
     //--------------------Hero by ID----------------------------------------------
