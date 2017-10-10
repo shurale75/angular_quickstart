@@ -11,11 +11,11 @@ h2, h3 {
 }
 body {
     margin: 2em;
-    background-color: #BBD8DC;
 }
 body, input[text], button {
     color: #888;
     font-family: Cambria, Georgia;
+    line-height: 10em;
 }
 /* everywhere else */
 * {
