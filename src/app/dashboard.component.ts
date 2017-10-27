@@ -13,7 +13,7 @@ export class DashboardComponent {
     constructor(private heroService: HeroService) { }
 
     ngOnInit(): void {
-        this.heroService.getHeroesSlowly()
+        this.heroService.getHeroes()
             .then(heroes => this.heroes = heroes.slice(1, 5));
     }
 }

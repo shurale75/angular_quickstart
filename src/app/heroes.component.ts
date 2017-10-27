@@ -35,13 +35,40 @@ export class HeroesComponent implements OnInit{
     getHeroes(): void {
         // this.heroes = this.heroService.getHeroes();
         //this.heroService.getHeroesPromise().then(heroes => this.heroes = heroes);        //-----get data from mock immidiately
-        this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);    //-----server latency simulation
+        this.heroService.getHeroes().then(heroes => this.heroes = heroes);    //-----server latency simulation
     }
 
     gotoDetail(): void {
         this.router.navigate(['/detail', this.selectedHero.id]);
     }
+
+    add(name: string): void {
+        name = name.trim();
+        if (!name) { return; }
+        this.heroService.create(name)
+            .then(hero => {
+                console.log('ADD Hero:', hero)
+                this.heroes.push(hero);
+                this.selectedHero = null;
+            });
+    }
+
+    delete(hero: Hero): void {
+        this.heroService
+            .delete(hero.id)
+            .then(() => {
+                this.heroes = this.heroes.filter(h => h !== hero);
+                if (this.selectedHero === hero) { this.selectedHero = null; }
+            });
+    }
 }
+
+
+
+
+
+
+
 
 // const HEROES: Hero[] = [
 //       { id: 11, name: 'Mr. Nice' },
